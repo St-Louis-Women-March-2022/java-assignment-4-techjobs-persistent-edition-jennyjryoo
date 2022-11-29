@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("skill")
+@RequestMapping("skills")
 public class SkillController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class SkillController {
     @PostMapping("add")
     public String processAddSkillForm (@ModelAttribute @Valid Skill newSkill, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            return "skill/add";
+            return "skills/add";
         }
         skillRepository.save(newSkill);
         return "redirect:";
