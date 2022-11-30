@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +35,7 @@ public class HomeController {
     public String index(Model model) {
 
         model.addAttribute("title", "My Jobs");
+        model.addAttribute("jobs",jobRepository.findAll());
 
         return "index";
     }
@@ -62,8 +62,8 @@ public class HomeController {
             Optional<Employer> result = employerRepository.findById(employerId);
             Employer employer = result.get();
             List<Skill> skillList = (List<Skill>) skillRepository.findAllById(skills);
-            newJob.setEmployer(employer);
             newJob.setSkills(skillList);
+            newJob.setEmployer(employer);
             jobRepository.save(newJob);
             return "redirect:";
         }
